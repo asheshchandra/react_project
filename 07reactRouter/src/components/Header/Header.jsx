@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link, NavLink} from 'react-router-dom'
 
 export default function Header() {
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+    
+    useEffect(() => {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
     return (
         <header className="shadow sticky z-50 top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -14,6 +30,12 @@ export default function Header() {
                         />
                     </Link>
                     <div className="flex items-center lg:order-2">
+                        <button
+                            onClick={toggleTheme}
+                            className="text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 font-medium rounded-lg text-sm px-3 py-2 mr-2 border dark:border-gray-700"
+                        >
+                            {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+                        </button>
                         <Link
                             to="#"
                             className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
@@ -70,16 +92,6 @@ export default function Header() {
                                     }
                                 >
                                     Github
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/facebook"
-                                    className={({ isActive }) =>
-                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
-                                    }
-                                >
-                                    Facebook
                                 </NavLink>
                             </li>
                             

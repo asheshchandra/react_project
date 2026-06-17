@@ -141,7 +141,7 @@ export default function Footer() {
                             <span className="sr-only">Twitter page</span>
                         </Link>
                         <a
-                            href="https://github.com/asheshchandra"
+                            href="https://github.com/asheshchandraJ"
                             className="text-gray-500 hover:text-gray-900"
                             target="_blank"
                             rel="noreferrer"
